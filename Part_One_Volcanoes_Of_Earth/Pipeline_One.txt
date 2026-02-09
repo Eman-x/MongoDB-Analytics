@@ -1,0 +1,29 @@
+#Part One 
+#Desert Ninjas
+
+
+volcanoes_of_earth_cleaned dataset
+
+Pipeline 1: 
+
+Title: All volcanoes that located in Japan
+
+[{
+ $project: {
+  _id: 0,
+  Volcano_Name: 1,
+  Volcano_Type: 1,
+  Country: 1,
+  Last_Eruption: 1,
+  Lat: 1,
+  Lon: 1
+ }
+}, {
+ $match: {
+  Country: {
+   $eq: 'Japan'
+  }
+ }
+}, {
+ $out: 'AllVolcanoesInJapan'
+}]

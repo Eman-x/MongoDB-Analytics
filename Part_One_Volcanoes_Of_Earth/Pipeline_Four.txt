@@ -1,0 +1,33 @@
+#Part One 
+#Desert Ninjas
+
+volcanoes_of_earth_cleaned dataset
+
+
+Pipeline 4: 
+
+Title: All volcanoes erupted before the common era (BCE) sorted by elevation level from highest to lowest
+
+[{
+ $project: {
+  _id: 0,
+  Volcano_Name: 1,
+  Country: 1,
+  Lat: 1,
+  Lon: 1,
+  Last_Eruption: 1,
+  elevation_meters: 1
+ }
+}, {
+ $match: {
+  Last_Eruption: {
+   $not: RegExp("BCE")
+  }
+ }
+}, {
+ $sort: {
+  elevation_meters: -1
+ }
+}, {
+ $out: 'AllVolcanoesEruptedBeforeBCE'
+}]

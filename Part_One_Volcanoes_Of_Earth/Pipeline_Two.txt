@@ -1,0 +1,30 @@
+#Part One 
+#Desert Ninjas
+
+volcanoes_of_earth_cleaned dataset
+
+
+Pipeline 2: 
+
+Title: All volcanoes where population within 5 km is more than 5 thousand people
+
+[{
+ $project: {
+  _id: 0,
+  Volcano_Name: 1,
+  Volcano_Type: 1,
+  Country: 1,
+  Last_Eruption: 1,
+  Lat: 1,
+  Lon: 1,
+  population_within_5km: 1
+ }
+}, {
+ $match: {
+  population_within_5km: {
+   $gt: 5000
+  }
+ }
+}, {
+ $out: 'AllVolcanoesWithPW5KMisMoreFiveK'
+}]

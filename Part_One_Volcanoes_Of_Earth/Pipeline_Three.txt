@@ -1,0 +1,38 @@
+#Part One 
+#Desert Ninjas
+
+volcanoes_of_earth_cleaned dataset
+
+
+Pipeline 3: 
+
+Title: All volcanoes per country per volcano type where the population is more than 100,000 people within 10km
+
+[{
+ $project: {
+  _id: 0,
+  Volcano_Name: 1,
+  Volcano_Type: 1,
+  Country: 1,
+  population_within_10km: 1
+ }
+}, {
+ $match: {
+  population_within_10km: {
+   $gt: 100000
+  }
+ }
+}, {
+ $group: {
+  _id: '$Country',
+  Grouping: {
+   $push: {
+    Country: '$Country',
+    Volcano_Type: '$Volcano_Type',
+    population_within_10km: '$population_within_10km'
+   }
+  }
+ }
+}, {
+ $out: 'VolcanoesPerCountryPerVolcanoTypePW10KM'
+}]
