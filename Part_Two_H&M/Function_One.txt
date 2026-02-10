@@ -1,0 +1,22 @@
+#Part One 
+#Desert Ninjas
+
+First function 
+
+exports = function(){
+  
+    var collection = context.services.get("mongodb-atlas").db("h_and_m").collection("h_and_m");
+   return collection.aggregate(
+    [     
+{
+ $match: {
+  product_type_name: {
+   $eq: 'T-shirt'
+  },
+  
+colour_group_name:{
+  $in: [ 'Red', 'orange']
+}
+ }
+}, ])
+};

@@ -1,0 +1,10 @@
+#Part Two 
+#Desert Ninjas
+
+exports = function(arg1, arg2){
+  
+    var collection = context.services.get("mongodb-atlas").db("h_and_m").collection("h_and_m");
+    return collection.find({index_group_name:  { '$regex' :arg1 , "$options": "i" }, colour_group_name: { '$regex' :arg2 , "$options": "i" } })
+};
+
+

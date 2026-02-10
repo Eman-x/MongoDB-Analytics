@@ -1,0 +1,15 @@
+#Part Two 
+#Desert Ninjas
+
+
+Function 3:
+
+
+exports = function(product_type, colour_group, price_range_min, price_range_max){
+  
+    var collection = context.services.get("mongodb-atlas").db("CodingDojo").collection("hm");
+    return collection.find({ product_type_name: {"$regex": product_type, "$options": "i"}, colour_group_name: {"$regex": colour_group, "$options": "i"}, price: {"$gte": price_range_min, "$lte": price_range_max} }, 
+                           { id:0, product_type_name: 1, colour_group_name:1, price: 1, department_name: 1, 'discount%':1}
+                           )
+};
+

@@ -1,0 +1,11 @@
+#Part Two 
+#Desert Ninjas
+
+Function 5: 
+Is done through indexes, check the NoSqlProject_Indexes.ipynb for results :)
+
+
+collection.create_index([("$**", pymongo.TEXT)])
+
+for review in collection.find({ "$text": { "$search": "black" } }):
+    print(review)

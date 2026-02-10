@@ -1,0 +1,56 @@
+#Part Two 
+#Desert Ninjas
+
+
+
+exports = function(arg){
+  
+    var collection = context.services.get("mongodb-atlas").db("h_and_m").collection("h_and_m");
+    return collection.aggregate([{
+ $match: {
+  product_type_name: {
+   $eq: arg
+  }
+ }
+}, {
+ $project: {
+  _id: 0,
+  prod_name: 1,
+  price: 1,
+  discount: '$discount_%',
+  calculated_discount: {
+   $multiply: [
+    {
+     $divide: [
+      '$discount_%',
+      100
+     ]
+    },
+    '$price'
+   ]
+  },
+  detail_desc: 1
+ }
+}, {
+ $addFields: {
+  new_price: {
+   $round: [
+    {
+     $subtract: [
+      '$price',
+      '$calculated_discount'
+     ]
+    },
+    2
+   ]
+  }
+ }
+}, {
+ $sort: {
+  new_price: 1
+ }
+}, {
+ $limit: 50
+}])
+
+};
